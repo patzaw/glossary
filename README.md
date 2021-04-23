@@ -71,9 +71,9 @@ glossary$get_definitions(c("mt", "UMIs"))
 
 In an markdown or html document, the definitions can be shown in
 tooltips using the `glossary$get_html_definitions()` function. For
-example <span
+example: <strong><span
 title="Unique Molecular Identifier. Each PCR primer is associated to a UMI to identify PCR duplicates when quantifying the transcripts. Therefore the number of counts corresponds to the number of UMI which is the quantification measure per feature."
-style="text-decoration: underline dashed;">UMIs</span>.
+style="text-decoration: underline dashed;">UMIs</span></strong>.
 
 To make it easier to use in an Rmd document in RStudio this function can
 be copied in a function with a shorter name such as:
