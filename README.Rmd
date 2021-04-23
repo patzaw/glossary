@@ -1,0 +1,98 @@
+---
+title: "README"
+output:
+  md_document:
+    variant: gfm
+    toc: true
+    toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+```
+
+# Introduction
+
+This small script allows the management of simple glossaries.
+
+## Dependencies
+
+This script depends on the following packages:
+
+```{r, include=FALSE}
+library(magrittr)
+library(dplyr)
+library(glue)
+library(reactable)
+```
+
+```{r, eval=FALSE}
+library(magrittr)
+library(dplyr)
+library(glue)
+library(reactable)
+```
+
+# Use
+
+## Load and create a glossary
+
+```{r}
+source("glossary.R")
+glossary <- create_glossary()
+```
+
+## Add terms in the glossary
+
+```{r}
+glossary$add_term(
+   "UMI",
+   "Unique Molecular Identifier. Each PCR primer is associated to a UMI to identify PCR duplicates when quantifying the transcripts. Therefore the number of counts corresponds to the number of UMI which is the quantification measure per feature."
+)
+```
+
+Synonyms can also be provided:
+
+```{r}
+glossary$add_term(
+   "MT",
+   "Genes coded by mitochondrial genome. MT (%) corresponds to the percentage of UMI corresponding to mitochondrial genes."
+)
+glossary$add_synonyms("MT", "MT (%)")
+```
+
+## Showing the glossary
+
+- `glossary$get_table()` returns the glossary tibble
+- `glossary$view()` shows the glossary in a reactable
+
+## Get definitions
+
+The following function is used to get the definitions of terms of interest.
+It's case insensitive and support plurals by default.
+
+```{r}
+glossary$get_definitions(c("mt", "UMIs"))
+```
+
+In an markdown or html document, the definitions can be shown in tooltips
+using the `glossary$get_html_definitions()` function.
+For example `r glossary$get_html_definitions("UMIs")`.
+
+To make it easier to use in an Rmd document in RStudio this function can
+be copied in a function with a shorter name such as:
+
+```{r}
+td <- glossary$get_html_definitions
+```
+
+And then the following
+markdown [snippet](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets)
+can be added in RStudio (Edit Snippets button in Global Options -> Code):
+
+```
+snippet td
+	`r${2} td(${1})`
+```
