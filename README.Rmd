@@ -80,6 +80,9 @@ glossary$get_definitions(c("mt", "UMIs"))
 In an markdown or html document, the definitions can be shown in tooltips
 using the `glossary$get_html_definitions()` function.
 For example: <strong>`r glossary$get_html_definitions("UMIs")`</strong>.
+CSS style can be customized using the `style` parameter
+(Unfortunately, CSS are not rendered in GitHub markdown as it is a part of the
+sanitization process).
 
 To make it easier to use in an Rmd document in RStudio this function can
 be copied in a function with a shorter name such as:
