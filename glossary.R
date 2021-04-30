@@ -77,10 +77,11 @@ create_glossary <- function(
             reactable::reactable(
                columns=list(
                   Terms=reactable::colDef(minWidth=50),
-                  Definition=reactable::colDef(minWidth=200)
+                  Definition=reactable::colDef(minWidth=200, html=TRUE)
                ),
                defaultSorted=c("Terms"),
-               searchable=TRUE
+               searchable=TRUE,
+               striped=TRUE
             )
       },
       
