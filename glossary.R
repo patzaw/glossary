@@ -142,7 +142,13 @@ create_glossary <- function(
             style <- default_style
          }
          stopifnot(is.character(style), length(style)==1, !is.na(style))
-         mgloss <- get_definitions(terms, include_plurals)
+         mgloss <- get_definitions(terms, include_plurals) %>% 
+            mutate(
+               Definition=str_remove_all(
+                  Definition,
+                  "<[^<]*>"
+               )
+            )
          glue::glue(
             '<span title="{mgloss$Definition}" style="{style}">',
             "{mgloss$Term}",
